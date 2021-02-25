@@ -1,0 +1,23 @@
+ahmedabad
+ahmedabad east
+ahmedabad west
+zalawad/ ahmedabad dist
+gandhinagar
+kheda
+mehsana
+sabarkantha
+patan
+surat
+surat dist
+valsad 
+navsari
+rajkot
+halar
+junagadh
+saurashtra
+vadodara
+vadodara dist
+panchmahal - dahod
+bharuch
+bhuj
+bhavnagar
