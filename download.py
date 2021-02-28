@@ -1,11 +1,10 @@
 import sandeshEpaper.sandeshEpaper as paper
+import sys
+import os
 
-print("Welcome in Sandesh-E-paper Downloader")
-print("select any district from below:")
-with open("dist_list.txt","r") as fp:
-	L = fp.readlines()
-	for each in L:
-		print(each,end=" ")
-dist = input()
+dist = sys.argv[1]
+cwd = sys.argv[2]
 url = "https://sandeshepaper.in/"
-paper.getEpaper(url,dist)
+print("test....")
+#os.system("touch aworking.txt")
+paper.getEpaper(url,dist,cwd)

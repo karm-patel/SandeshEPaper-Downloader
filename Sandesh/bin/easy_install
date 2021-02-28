@@ -1,4 +1,4 @@
-#!/home/kinetic/pythons/newspaperDownloader/Sandesh/bin/python3
+#!/home/kinetic/pythons/newspaperDownloader/Sandesh/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
