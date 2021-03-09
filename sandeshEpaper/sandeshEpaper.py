@@ -65,7 +65,7 @@ class sandeshEpaper:
 				print("downloading...")
 				response = sandeshEpaper.getResponse(pdf_url)
 
-				name = str(dist)+"- "+str(date.today())+" by Karm"
+				name = str(dist)+"- "+str(date.today())+" Sandesh.pdf"
 				filename = Path(str(cwd)+"/"+name)
 				filename.write_bytes(response.content)
 				print("sucessfully downloaded")

@@ -1,1 +1,2 @@
-24 18 * * * $(which python3) /home/kinetic/pythons/newspaperDownloader/download.py ahmedabad /home/kinetic/pythons/newspaperDownloader >> ~/cron.log 2>&1
+0 11 * * * rm /home/kinetic/pythons/newspaperDownloader/*Sandesh.pdf >> ~/cron2.log 2>&1
+1 11 * * * /home/kinetic/pythons/newspaperDownloader/Sandesh/bin/python /home/kinetic/pythons/newspaperDownloader/download.py ahmedabad /home/kinetic/pythons/newspaperDownloader >> ~/cron.log 2>&1

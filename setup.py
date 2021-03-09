@@ -1,6 +1,12 @@
 import os
+import subprocess
+
 cwd = os.getcwd()
-os.system("sudo -H pip3 install -r requirements.txt")
+getVersion =  subprocess.Popen("which python", shell=True, stdout=subprocess.PIPE).stdout
+version =  getVersion.read()
+
+
+os.system("pip install -r requirements.txt")
 os.system("sudo apt install cron")
 dists = []
 with open("dist_list.txt","r") as fp:
@@ -34,19 +40,23 @@ while flg==0:
 	except:
 		print("Incorrect range of minitues")
 
-timeString = str(minitues)+" "+str(hours)+" * * *"
+timeString = str(minitues+1)+" "+str(hours)+" * * *"
+timeString2 = str(minitues)+" "+str(hours)+" * * *"
 #timeString = "* * * * *"
 display = " DISPLAY=:0.0\n"
-command = " $(which python3) "+str(cwd)+"/download.py "+str(dist)+" "+str(cwd)+" >> ~/cron.log 2>&1\n"
+deleteCommand = " rm "+str(cwd)+"/*Sandesh.pdf >> ~/cron2.log 2>&1\n"
+command = " "+str(version.decode()[:-1])+" "+str(cwd)+"/download.py "+str(dist)+" "+str(cwd)+" >> ~/cron.log 2>&1\n"
 try:
 	with open("cronCommand.txt","x") as f:
 		#f.write(timeString+display)
+		f.write(timeString2+deleteCommand)
 		f.write(timeString+command)
 		#f.write(str(timeString)+" touch "+str(cwd)+"/new.txt\n")
 except FileExistsError:
-	print("in....")
+	print("Success....")
 	with open("cronCommand.txt","w") as f:
 		#f.write(timeString+display)
+		f.write(timeString2+deleteCommand)
 		f.write(timeString+command)
 		# f.write(str(timeString)+" touch "+str(cwd)+"/new.txt\n")
 
