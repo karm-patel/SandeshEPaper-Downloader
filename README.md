@@ -9,4 +9,4 @@
 $ python setup.py</br>
 4)Enter district & Time(hours & minitue)</br>
 5)IF you get "success..." message then all are setup for daily :)</br>
-6)If you get an Error then contact me :)</br>
+6)In case this is not work for you withou showing an error then go to cron.log & cron2.log file located at home directory. In these files you can see errors</br>
