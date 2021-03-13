@@ -4,7 +4,7 @@
 ## Steps:
 
 1)Create Python 3.6 Virtual Environment & Activate it</br>
-2)Clone this directory</br>
+2)Clone this repository</br>
 3)Run setup.py file from it</br>
 $ python setup.py</br>
 4)Enter district & Time(hours & minitue)</br>
