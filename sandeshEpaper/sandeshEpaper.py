@@ -4,6 +4,17 @@ from plyer import notification
 from pathlib import Path
 from datetime import date 
 import os
+## credits: http://linuxcursor.com/python-programming/06-how-to-send-pdf-ppt-attachment-with-html-body-in-python-script
+from socket import gethostname
+from datetime import date
+#import email
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+import json
+import sys
+
 	
 
 
@@ -22,9 +33,33 @@ class sandeshEpaper:
                     app_icon = "/home/kinetic/Downloads/IMG_3984-min-compressed (1).jpg",
                     timeout= 10,
                     toast=False)
+	@staticmethod
+	def send_email_pdf_figs(sender_email, sender_email_password,destination_email,
+                        path_to_pdf, subject, message):
+		server = smtplib.SMTP('smtp.gmail.com', 587)
+		server.starttls()
+
+		server.login(sender_email, sender_email_password)
+		# Craft message (obj)
+		msg = MIMEMultipart()
+
+		message = f'{message}\nSend from Hostname: {gethostname()}'
+		msg['Subject'] = subject
+		msg['From'] = sender_email
+		msg['To'] = destination_email
+		# Insert the text to the msg going by e-mail
+		msg.attach(MIMEText(message, "plain"))
+		# Attach the pdf to the msg going by e-mail
+		# with open(path_to_pdf, "rb") as f:
+		#     #attach = email.mime.application.MIMEApplication(f.read(),_subtype="pdf")
+		#     attach = MIMEApplication(f.read(),_subtype="pdf")
+		# attach.add_header('Content-Disposition','attachment',filename=str(path_to_pdf))
+		# msg.attach(attach)
+		# send msg
+		server.send_message(msg)
 
 	@staticmethod
-	def getEpaper(url,dist,cwd):
+	def getEpaper(url,dist,cwd,email):
 		#print("dist",dist)
 
 		#html content of URL
@@ -62,14 +97,28 @@ class sandeshEpaper:
 				        pdf_url = i.attrs["href"]
 				        print(pdf_url)
 
+				name = str(dist)+"- "+str(date.today())+" Sandesh.pdf"
+				print(str(cwd))
+				if email:
+					with open(str(cwd)+"/mailinfo.txt","r") as fp:
+						sender = fp.readline().strip()
+						password = fp.readline().strip()
+						reciver = fp.readline().strip()
+					sandeshEpaper.send_email_pdf_figs(sender, password,reciver,name,name,pdf_url)
+
 				print("downloading...")
 				response = sandeshEpaper.getResponse(pdf_url)
+				#response = "buffer testing"
 
-				name = str(dist)+"- "+str(date.today())+" Sandesh.pdf"
-				filename = Path(str(cwd)+"/"+name)
+				filename = str(cwd)+"/"+name
+				filename = Path(filename)
 				filename.write_bytes(response.content)
 				print("sucessfully downloaded")
 				#sandeshEpaper.notify(dist)
 		else:
 			print("webConetnt is empty")
 			return 0
+		
+		
+
+	

@@ -2,7 +2,7 @@ import os
 import subprocess
 
 cwd = os.getcwd()
-getVersion =  subprocess.Popen("which python", shell=True, stdout=subprocess.PIPE).stdout
+getVersion =  subprocess.Popen("which python3", shell=True, stdout=subprocess.PIPE).stdout
 version =  getVersion.read()
 
 
@@ -45,7 +45,15 @@ timeString2 = str(minitues)+" "+str(hours)+" * * *"
 #timeString = "* * * * *"
 display = " DISPLAY=:0.0\n"
 deleteCommand = " rm "+str(cwd)+"/*Sandesh.pdf >> ~/cron2.log 2>&1\n"
-command = " "+str(version.decode()[:-1])+" "+str(cwd)+"/download.py "+str(dist)+" "+str(cwd)+" >> ~/cron.log 2>&1\n"
+#command = " "+str(version.decode()[:-1])+" "+str(cwd)+"/download.py "+str(dist)+" "+str(cwd)+" >> ~/cron.log 2>&1\n"
+
+#Send email
+email_flg = input("Want to send email?\nyes - 1\nno -0\n")
+if email_flg:
+	command = " "+str(version.decode()[:-1])+" "+str(cwd)+"/download.py "+str(dist)+" "+str(cwd)+ " " +str(1)+ " >> ~/cron.log 2>&1\n"
+else:
+	command = " "+str(version.decode()[:-1])+" "+str(cwd)+"/download.py "+str(dist)+" "+str(cwd)+ " " +str(0)+ " >> ~/cron.log 2>&1\n"
+
 try:
 	with open("cronCommand.txt","x") as f:
 		#f.write(timeString+display)
@@ -61,5 +69,13 @@ except FileExistsError:
 		# f.write(str(timeString)+" touch "+str(cwd)+"/new.txt\n")
 
 os.system("crontab cronCommand.txt")
+
+
+# if email_flg:
+# 	sender = input("Enter Sender Email:")
+# 	password = input("Enter Password:")
+# 	reciver = input("Enter Reciver Email:")
+# 	command = " "+str(version.decode()[:-1])+" "+str(cwd)+"SendPdfinEmail.py "+str(dist)+" "+str(sender)+" " + str(password)+ " "+ str(reciver) +" >> ~/cron.log 2>&1\n"
+
 
 

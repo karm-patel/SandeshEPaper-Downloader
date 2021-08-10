@@ -1,2 +1,2 @@
-0 12 * * * rm /home/kinetic/pythons/newspaperDownloader/*Sandesh.pdf >> ~/cron2.log 2>&1
-1 12 * * * /home/kinetic/pythons/newspaperDownloader/Sandesh/bin/python /home/kinetic/pythons/newspaperDownloader/download.py ahmedabad /home/kinetic/pythons/newspaperDownloader >> ~/cron.log 2>&1
+19 15 * * * rm /home/kinetickarm/Desktop/newspaperDownloader/*Sandesh.pdf >> ~/cron2.log 2>&1
+20 15 * * * /usr/bin/python3 /home/kinetickarm/Desktop/newspaperDownloader/download.py ahmedabad /home/kinetickarm/Desktop/newspaperDownloader 1 >> ~/cron.log 2>&1
